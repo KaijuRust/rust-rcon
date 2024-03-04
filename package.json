@@ -1,0 +1,25 @@
+{
+  "name": "rust-rcon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib",
+  "typings": "lib",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "tsc",
+    "local": "tsc && cd ~/Developer/Kaiju/discord-bot/ && npm install --save-dev file:/Users/jack/Developer/Kaiju/rust-rcon && cd ~/Developer/Kaiju/rust-rcon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/ws": "^6.0.4",
+    "events": "^3.3.0",
+    "typed-emitter": "^2.1.0",
+    "ws": "^6.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "typescript": "^5.3.3"
+  }
+}
