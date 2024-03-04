@@ -20,4 +20,7 @@ export interface Options {
     ///   @default: 1
     readonly maxPending?: number
 
+    /// Packet sending timeout threshold
+    readonly packetSendingTimeout?: number
+
 }
