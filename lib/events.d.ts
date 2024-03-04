@@ -5,9 +5,3 @@ export type Events = {
     message: (packet: Packet) => void;
     error: (error: any) => void;
 };
-export declare enum EventType {
-    connected = "connected",
-    disconnected = "disconnected",
-    message = "message",
-    error = "error"
-}
