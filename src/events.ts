@@ -10,3 +10,10 @@ export type Events = {
     error: (error: any) => void
 
 }
+
+export enum EventTypes {
+	connected = "connected",
+	disconnected = "disconnected",
+	message = "message",
+	error = "error"
+}
