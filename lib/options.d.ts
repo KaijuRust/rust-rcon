@@ -4,4 +4,5 @@ export interface Options {
     readonly password: string;
     readonly timeout?: number;
     readonly maxPending?: number;
+    readonly packetSendingTimeout?: number;
 }
