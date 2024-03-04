@@ -11,7 +11,7 @@ export type Events = {
 
 }
 
-export enum EventTypes {
+export enum EventType {
 	connected = "connected",
 	disconnected = "disconnected",
 	message = "message",
