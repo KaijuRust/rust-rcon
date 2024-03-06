@@ -35,15 +35,16 @@ export class Client {
 			`ws://${this.options.host}:${this.options.port}/${this.options.password}`
 		);
 
-		// this.webSocket.on("open", this.onConnect);
-		this.webSocket.on("error", this.onError);
-		this.webSocket.on("close", this.onClose);
-		// this.webSocket.on("message", this.onMessage);
-
-		// this.webSocket.onmessage = this.onMessage.bind(this);
-
 		this.webSocket.on('open', (e: any) => {
 			this.onConnect(e)
+		})
+
+		this.webSocket.on('close', (code: any, reason: any) => {
+			this.onClose(code, reason)
+		})
+
+		this.webSocket.on('error', (e: any) => {
+			this.onError(e)
 		})
 
 		this.webSocket.on('message', (data) => {
@@ -72,36 +73,27 @@ export class Client {
 		return new Promise((resolve, reject) => {
 			const commandResponseCallback = (serializedData: any) => {
 				const data = JSON.parse(serializedData);
+				let packet = this.processPacket(data)
+				if (!packet)
+					return reject("Failed to process packet")
 
-				if (data.Type === PacketType.generic && data.Identifier === commandIdentifier) {
+				if (packet.type === PacketType.generic && packet.id === commandIdentifier) {
 					this.webSocket?.removeEventListener('message', commandResponseCallback);
 					this.commandIdentifiers.splice(this.commandIdentifiers.indexOf(commandIdentifier));
 
-					let packet = this.processPacket(data)
-					if (packet) {
-						this.emitter.emit('message', packet)
-                    	return resolve(packet)
-                    } else {
-                    	return reject("Failed to process packet")
-                    }
+					this.emitter.emit('message', packet)
+                    return resolve(packet)
                 }
             }
 
+			let timeout = this.options.packetSendingTimeout ?? 5000 // Default: 5 seconds
 			setTimeout(() => {
 				this.webSocket?.removeEventListener('message', commandResponseCallback);
                 return reject(`${message} didn't return a response`);
-            }, 5 * 1000);
+            }, timeout);
 
             this.webSocket?.on('message', commandResponseCallback);
 		})
-	}
-
-	public sendMessage(message: string) {
-		this.webSocket?.send(JSON.stringify({
-			// Identifier: parseInt(identifier ?? 69420),
-			Message: message,
-			// Name: name
-		}));
 	}
 
 	private generateRandomCommandId() {
@@ -112,19 +104,15 @@ export class Client {
 	// MARK: - Events
 
 	private onConnect(event: any) {
-		console.log(`Connected to RCON`);
-
 		this.emitter.emit("connected")
 	}
 
 	private onError(error: Error) {
-		console.error("RCON Error:", error);
-		// this.emit("error", webSocket, error);
+		this.emitter.emit("error", error);
 	}
 
-	private onClose(event: WebSocket.CloseEvent) {
-		console.log("RCON Closed:", event.code, event.reason);
-		// this.emit("closed", webSocket, code, reason);
+	private onClose(code: number, reason: string) {
+		this.emitter.emit("disconnected", code, reason);
 	}
 
 	private onMessage(serializedData: any) {

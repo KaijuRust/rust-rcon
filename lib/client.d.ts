@@ -14,7 +14,6 @@ export declare class Client {
     connect(): void;
     send(message: string, name?: string, identifier?: number): void;
     sendAndWait(message: string, name?: string, identifier?: number): Promise<Packet>;
-    sendMessage(message: string): void;
     private generateRandomCommandId;
     private onConnect;
     private onError;
