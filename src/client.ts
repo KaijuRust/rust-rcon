@@ -116,20 +116,16 @@ export class Client {
 	}
 
 	private onMessage(serializedData: any) {
-		if (typeof serializedData === 'object') {
-			let data = JSON.parse(serializedData);
-			if (data) {
-				let packet = this.processPacket(data)
-				if (packet) {
-					this.emitter.emit('message', packet)
-				} else {
-					console.log("\t|=>" + `Failed to process packet, ${data.Message}`)
-				}
+		let data = JSON.parse(serializedData);
+		if (data) {
+			let packet = this.processPacket(data)
+			if (packet) {
+				this.emitter.emit('message', packet)
 			} else {
-				console.log(`ERROR ERROR onMessage called and failed to parse object, type: ${typeof serializedData}}, Data: ${serializedData}`)
+				console.log("\t|=>" + `Failed to process packet, ${data.Message}`)
 			}
 		} else {
-			console.log(`ERROR ERROR onMessage called with data type: ${typeof serializedData}}, Data: ${serializedData}`)
+			console.log(`ERROR ERROR onMessage called and failed to parse object, Data: ${serializedData}`)
 		}
 	}
 
