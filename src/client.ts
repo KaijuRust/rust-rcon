@@ -169,6 +169,13 @@ export class Client {
 					payload: JSON.parse(data.Message)
 				}
 
+			case PacketType.report:
+				return {
+					id: identifier,
+					type: PacketType.report,
+					payload: JSON.parse(data.Message)
+				}
+
 			default:
 				console.log("\t|=>" + `Unknown packet type, ${data.Type}`)
 				return

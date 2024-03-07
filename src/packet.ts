@@ -10,5 +10,6 @@ export enum PacketType {
 	error = 'Error',
 	warning = 'Warning',
 	generic = 'Generic',
-	chat = 'Chat'
+	chat = 'Chat',
+	report = 'Report'
 }
