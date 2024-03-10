@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "RCON Client to interface with a Rust server.",
   "scripts": {
     "build": "bun build --target=node ./src/index.ts --outfile=dist/index.js && bun run build:declaration",
@@ -23,7 +23,7 @@
   "dependencies": {
     "events": "^3.3.0",
     "typed-emitter": "^2.1.0",
-    "ws": "^6.1.2"
+    "ws": "6.1.2"
   },
   "repository": {
     "type": "git",
