@@ -1,4 +1,4 @@
-# rust-rcon
+# rust-rcon-client
 
 To install dependencies:
 
