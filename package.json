@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "RCON Client to interface with a Rust server.",
   "scripts": {
     "build": "bun build --target=node ./src/index.ts --outfile=dist/index.js && bun run build:declaration",
@@ -12,6 +12,7 @@
     "postbuild": "rimraf tsconfig.types.tsbuildinfo"
   },
   "devDependencies": {
+    "@types/bun": "^1.0.8",
     "bun-types": "latest",
     "prettier": "^3.0.3",
     "rimraf": "^5.0.5",
@@ -22,8 +23,7 @@
   },
   "dependencies": {
     "events": "^3.3.0",
-    "typed-emitter": "^2.1.0",
-    "ws": "6.1.2"
+    "typed-emitter": "^2.1.0"
   },
   "repository": {
     "type": "git",
