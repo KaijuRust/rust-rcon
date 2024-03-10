@@ -30,7 +30,7 @@ export class Client {
 			`ws://${this.options.host}:${this.options.port}/${this.options.password}`
 		)
 
-		this.webSocket.addEventListener('open', event => { this.onConnect(event) })
+		this.webSocket.addEventListener('open', event => { this.onConnect() })
 		this.webSocket.addEventListener('close', event => { this.onClose(event.code, event.reason) })
 		this.webSocket.addEventListener('error', event => { this.onError(event.error, event.message) })
 		this.webSocket.addEventListener('message', event => { this.onMessage(event.data) })
@@ -88,7 +88,7 @@ export class Client {
 
     // MARK: - Events
 
-    private onConnect(event: any) {
+    private onConnect() {
         this.emitter.emit("connected")
     }
 
