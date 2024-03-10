@@ -1,25 +1,26 @@
 {
   "name": "rust-rcon",
+  "description": "RCON Client to interface with a Rust server.",
   "version": "1.0.0",
-  "description": "",
-  "main": "lib",
-  "typings": "lib",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "prepare": "npm run build",
-    "build": "tsc",
-    "local": "tsc && cd ~/Developer/Kaiju/discord-bot/ && npm install --save-dev file:/Users/jack/Developer/Kaiju/rust-rcon && cd ~/Developer/Kaiju/rust-rcon",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "bun run build.mjs",
+    "prepublishOnly": "bun run build"
   },
-  "author": "",
-  "license": "ISC",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@types/bun": "latest",
+    "bun-plugin-dts": "^0.2.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
   "dependencies": {
-    "@types/ws": "^6.0.4",
     "events": "^3.3.0",
     "typed-emitter": "^2.1.0",
-    "ws": "^6.1.2"
-  },
-  "devDependencies": {
-    "@types/node": "^20.11.24",
-    "typescript": "^5.3.3"
+    "ws": "^8.16.0"
   }
 }
