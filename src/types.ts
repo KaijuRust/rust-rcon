@@ -1,4 +1,25 @@
 
+export interface Packet {
+    id: number
+    type: PacketType
+    payload: string | object
+}
+
+export enum PacketType {
+	error = 'Error',
+	warning = 'Warning',
+	generic = 'Generic',
+	chat = 'Chat',
+	report = 'Report'
+}
+
+export type Events = {
+    connected: () => void,
+    disconnected: (code: number, reason: string) => void,
+    message: (packet: Packet) => void,
+    error: (error: any) => void
+}
+
 export interface Options {
 
 	/// RCON Host IP Address

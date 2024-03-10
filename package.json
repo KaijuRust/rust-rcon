@@ -1,19 +1,21 @@
 {
-  "name": "rust-rcon",
-  "description": "RCON Client to interface with a Rust server.",
-  "version": "1.0.0",
+  "name": "rust-rcon-client",
+  "module": "index.ts",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
+  "version": "1.0.1",
+  "description": "RCON Client to interface with a Rust server.",
   "scripts": {
-    "build": "bun run build.mjs",
-    "prepublishOnly": "bun run build"
+    "build": "bun build --target=node ./src/index.ts --outfile=dist/index.js && bun run build:declaration",
+    "build:declaration": "tsc --emitDeclarationOnly --project tsconfig.types.json",
+    "postbuild": "rimraf tsconfig.types.tsbuildinfo"
   },
-  "files": [
-    "dist"
-  ],
   "devDependencies": {
-    "@types/bun": "latest",
-    "bun-plugin-dts": "^0.2.1"
+    "bun-types": "latest",
+    "prettier": "^3.0.3",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.2.2"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -22,5 +24,19 @@
     "events": "^3.3.0",
     "typed-emitter": "^2.1.0",
     "ws": "^8.16.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KaijuRust/rust-rcon.git"
+  },
+  "keywords": [
+    "Rust",
+    "RCON"
+  ],
+  "author": "Jack Perry",
+  "license": "MIT",
+  "files": [
+    "dist/*.js",
+    "dist/*.d.ts"
+  ]
 }

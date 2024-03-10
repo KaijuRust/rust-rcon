@@ -1,4 +1,9 @@
-export * from "./client"
-export * from "./options"
-export * from "./events"
-export * from "./packet"
+// Export Types
+export {
+    Packet,
+    PacketType,
+    Events,
+    Options,
+} from './types'
+
+export { Client } from './client'
