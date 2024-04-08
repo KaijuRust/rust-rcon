@@ -32,7 +32,10 @@ export class Client {
 
 	public connect() {
 		this.webSocket = new WebSocket(
-			`ws://${this.options.host}:${this.options.port}/${this.options.password}`
+			`ws://${this.options.host}:${this.options.port}/${this.options.password}`,
+			{
+				handshakeTimeout: 30
+			}
 		);
 
 		this.webSocket.on('open', (e: any) => {
