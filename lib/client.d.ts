@@ -12,6 +12,7 @@ export declare class Client {
     private commandIdentifiers;
     constructor(options: Options);
     connect(): void;
+    disconnect(): void;
     send(message: string, name?: string, identifier?: number): void;
     sendAndWait(message: string, name?: string, identifier?: number): Promise<Packet>;
     private generateRandomCommandId;

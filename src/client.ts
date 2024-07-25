@@ -52,6 +52,10 @@ export class Client {
 		})
 	}
 
+    public disconnect() {
+        this.webSocket?.close();
+    }
+
 	// MARK: - Messages
 
 	public send(message: string, name?: string, identifier?: number) {
